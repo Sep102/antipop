@@ -9,14 +9,14 @@ int main()
     if(ac_file)
     {
 	/* Should be a single integer in the file:
-	 * 0 = AC or Battery
-	 * >0 = AC only
+	 * 1 = AC only
+	 * !1 = AC or Battery
 	 */
 	ac_only = fgetc(ac_file);
 	fclose(ac_file);
     }
 
-    if(!ac_only)
+    if(ac_only != 1)
     {
 	while(1)
 	{
