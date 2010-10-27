@@ -1,27 +1,42 @@
 #include <stdio.h>
 #include <unistd.h>
 
+int IsNum(int c)
+{
+    return c >= '0' && c <= '9';
+}
+
+typedef int (*FFPred)(int);
+int FindFirstOf(FILE *file, FFPred pred)
+{
+    if(!file || !pred)
+    {
+	return -1;
+    }
+    
+    while(!feof(file))
+    {
+	int c = fgetc(file);
+	if(pred(c))
+	{
+	    return c;
+	}
+    }
+
+    return -1;
+}
+
 int main()
 {
-    int ac_only = 0;
-
+    /* Should be a single integer in the file:
+     * 1 = AC only
+     * !1 = AC or Battery
+     */
     FILE *ac_file = fopen("/usr/local/share/antipop/ac_only", "r");
+    int ac_only = 0;
     if(ac_file)
     {
-	/* Should be a single integer in the file:
-	 * 1 = AC only
-	 * !1 = AC or Battery
-	 */
-	while(!feof(ac_file))
-	{
-	    int c = fgetc(ac_file);
-	    if(c >= '0' || c <= '9')
-	    {
-		ac_only = c;
-		break;
-	    }
-	}
-
+	ac_only = FindFirstOf(ac_file, IsNum);
 	fclose(ac_file);
     }
 
