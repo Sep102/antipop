@@ -12,7 +12,16 @@ int main()
 	 * 1 = AC only
 	 * !1 = AC or Battery
 	 */
-	ac_only = fgetc(ac_file);
+	while(!feof(ac_file))
+	{
+	    int c = fgetc(ac_file);
+	    if(c >= '0' || c <= '9')
+	    {
+		ac_only = c;
+		break;
+	    }
+	}
+
 	fclose(ac_file);
     }
 
