@@ -29,7 +29,7 @@ int main()
 	while(1)
 	{
 	    FILE *ac_check_proc = popen("pmset -g | grep \"AC Power.*\\*\"", "r");
-	    if(ac_check_proc && !feof(ac_check_proc))
+	    if(ac_check_proc && fgetc(ac_check_proc) > 0)
 	    {
 		system("say ' '");
 		pclose(ac_check_proc);
