@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#include <AudioToolbox/AudioServices.h>
+#include <CoreFoundation/CFString.h>
+
 int IsNum(int c)
 {
     return c >= '0' && c <= '9';
@@ -42,11 +45,14 @@ int main()
 
     if(ac_only != 1)
     {
+	SystemSoundID soundID;
+	AudioServicesCreateSystemSoundID(CFURLCreateWithString(NULL, CFSTR("silent.aiff"), NULL), &soundID);
 	while(1)
 	{
-	    system("say ' '");
+	    AudioServicesPlaySystemSound(soundID);
 	    sleep(10);
 	}
+	AudioServicesDisposeSystemSoundID(soundID);
     }
     else
     {
