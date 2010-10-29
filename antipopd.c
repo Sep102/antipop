@@ -39,7 +39,7 @@ int main()
     int ac_only = 0;
     if(ac_file)
     {
-	ac_only = FindFirstOf(ac_file, IsNum);
+	ac_only = FindFirstOf(ac_file, IsNum) - '0';
 	fclose(ac_file);
     }
 
