@@ -43,16 +43,18 @@ int main()
 	fclose(ac_file);
     }
 
+    SystemSoundID soundID;
+    AudioServicesCreateSystemSoundID
+	    ( CFURLCreateWithString(NULL, CFSTR("/Extra/libexec/antipop/silent.aiff"), NULL)
+	    , &soundID );
+
     if(ac_only != 1)
     {
-	SystemSoundID soundID;
-	AudioServicesCreateSystemSoundID(CFURLCreateWithString(NULL, CFSTR("silent.aiff"), NULL), &soundID);
 	while(1)
 	{
 	    AudioServicesPlaySystemSound(soundID);
 	    sleep(10);
 	}
-	AudioServicesDisposeSystemSoundID(soundID);
     }
     else
     {
@@ -61,11 +63,13 @@ int main()
 	    FILE *ac_check_proc = popen("pmset -g | grep \"AC Power.*\\*\"", "r");
 	    if(ac_check_proc && fgetc(ac_check_proc) > 0)
 	    {
-		system("say ' '");
+		AudioServicesPlaySystemSound(soundID);
 		pclose(ac_check_proc);
 	    }
 
 	    sleep(10);
 	}
     }
+
+    AudioServicesDisposeSystemSoundID(soundID);
 }
