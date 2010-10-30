@@ -60,7 +60,7 @@ int main()
 
     SystemSoundID soundID;
     AudioServicesCreateSystemSoundID
-	    ( CFURLCreateWithString(NULL, CFSTR("/usr/local/share/antipop/silent.aiff"), NULL)
+	    ( CFURLCreateWithString(NULL, CFSTR("/Extra/share/antipop/silent.aiff"), NULL)
 	    , &soundID );
 
     if(ac_only != 1)

@@ -7,6 +7,7 @@ OBJECTS = antipopd.o
 ##
 all:	antipopd
 antipopd:	$(OBJECTS)
-	$(CC) -o bin/antipopd $(OBJECTS) $(LIBS)
+	mkdir -p antipop/root/Extra/bin
+	$(CC) -o antipop/root/Extra/bin/antipopd $(OBJECTS) $(LIBS)
 antipopd.o:	antipopd.c
 	$(CC) $(CFLAGS) -c antipopd.c

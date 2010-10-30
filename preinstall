@@ -1,4 +1,0 @@
-#! /bin/sh
-if [ -f /Library/LaunchAgents/net.tomsick.antipop.plist ]; then
-    launchctl unload /Library/LaunchAgents/net.tomsick.antipop.plist
-fi

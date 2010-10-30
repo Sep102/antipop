@@ -1,2 +1,0 @@
-#! /bin/sh
-launchctl load /Library/LaunchAgents/net.tomsick.antipop.plist
