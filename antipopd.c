@@ -4,6 +4,7 @@
 
 #include <AudioToolbox/AudioServices.h>
 #include <CoreFoundation/CoreFoundation.h>
+#include <IOKit/ps/IOPSKeys.h>
 
 int IsNum(int c)
 {
@@ -36,12 +37,12 @@ int OnAC()
     CFArrayRef ps = (CFTypeRef)IOPSCopyPowerSourcesList(blob);
         
     CFDictionaryRef theDict = (CFDictionaryRef)IOPSGetPowerSourceDescription(blob, CFArrayGetValueAtIndex(ps, 0));
-    CFStringRef isCharging = CFDictionaryGetValue(theDict, CFSTR("Power Source State" ));
-        
+    CFStringRef isCharging = CFDictionaryGetValue(theDict, CFSTR(kIOPSPowerSourceStateKey));
+
     CFRelease(ps);
     CFRelease(blob);
 
-    return CFStringCompare(isCharging, CFSTR("AC Power"), 0) == 0;
+    return CFStringCompare(isCharging, CFSTR(kIOPSACPowerValue), 0) == 0;
 }
 
 int main()
