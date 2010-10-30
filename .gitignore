@@ -2,3 +2,4 @@
 *.o
 *.swp
 bin
+.DS_Store
