@@ -63,25 +63,14 @@ int main()
 	    ( CFURLCreateWithString(NULL, CFSTR("/Extra/share/antipop/silent.aiff"), NULL)
 	    , &soundID );
 
-    if(ac_only != 1)
+    while(1)
     {
-	while(1)
+	if(!ac_only || OnAC())
 	{
 	    AudioServicesPlaySystemSound(soundID);
-	    sleep(10);
 	}
-    }
-    else
-    {
-	while(1)
-	{
-	    if(OnAC())
-	    {
-		AudioServicesPlaySystemSound(soundID);
-	    }
 
-	    sleep(10);
-	}
+	sleep(10);
     }
 
     AudioServicesDisposeSystemSoundID(soundID);
