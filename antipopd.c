@@ -39,10 +39,12 @@ int OnAC()
     CFDictionaryRef theDict = (CFDictionaryRef)IOPSGetPowerSourceDescription(blob, CFArrayGetValueAtIndex(ps, 0));
     CFStringRef isCharging = CFDictionaryGetValue(theDict, CFSTR(kIOPSPowerSourceStateKey));
 
+    int onAC = CFStringCompare(isCharging, CFSTR(kIOPSACPowerValue), 0) == 0;
+
     CFRelease(ps);
     CFRelease(blob);
 
-    return CFStringCompare(isCharging, CFSTR(kIOPSACPowerValue), 0) == 0;
+    return onAC;
 }
 
 int main()
