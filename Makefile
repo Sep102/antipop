@@ -2,13 +2,15 @@ CC = cc
 CFLAGS = -O3 
 LIBS = -framework AudioToolbox -framework CoreFoundation -framework IOKit
 OBJECTS = antipopd.o
+BINDIR = antipop/root/Extra/bin
+PRODUCT = $(BINDIR)/antipopd
 
 # Targets
 ##
 all:	antipopd
 antipopd:	$(OBJECTS)
-	mkdir -p antipop/root/Extra/bin
-	$(CC) -o antipop/root/Extra/bin/antipopd $(OBJECTS) $(LIBS)
+	mkdir -p $(BINDIR)
+	$(CC) -o $(PRODUCT) $(OBJECTS) $(LIBS)
 antipopd.o:	antipopd.c
 	$(CC) $(CFLAGS) -c antipopd.c
 clean:

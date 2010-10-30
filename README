@@ -1,0 +1,15 @@
+Dependencies:
+    To build installer: PackageMaker (installed with Xcode)
+
+To build:
+    make all
+
+To build installer package:
+    make all
+    open Compiled\ antipop.pmdoc
+    Click Build in PackageMaker toolbar
+    Type name to save package as
+    Wait until build finished
+
+To install:
+    Open saved package
