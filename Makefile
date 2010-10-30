@@ -11,3 +11,5 @@ antipopd:	$(OBJECTS)
 	$(CC) -o antipop/root/Extra/bin/antipopd $(OBJECTS) $(LIBS)
 antipopd.o:	antipopd.c
 	$(CC) $(CFLAGS) -c antipopd.c
+clean:
+	rm -rf $(OBJECTS) antipop/root/Extra/bin
