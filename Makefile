@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -O3 
-LIBS = -framework AudioToolbox -framework CoreFoundation
+LIBS = -framework AudioToolbox -framework CoreFoundation -framework IOKit
 OBJECTS = antipopd.o
 
 # Targets

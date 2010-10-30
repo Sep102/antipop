@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/cdefs.h>
 
 #include <AudioToolbox/AudioServices.h>
-#include <CoreFoundation/CFString.h>
+#include <CoreFoundation/CoreFoundation.h>
 
 int IsNum(int c)
 {
@@ -27,6 +28,20 @@ int FindFirstOf(FILE *file, FFPred pred)
     }
 
     return -1;
+}
+
+int OnAC()
+{
+    CFTypeRef blob = (CFTypeRef)IOPSCopyPowerSourcesInfo();
+    CFArrayRef ps = (CFTypeRef)IOPSCopyPowerSourcesList(blob);
+        
+    CFDictionaryRef theDict = (CFDictionaryRef)IOPSGetPowerSourceDescription(blob, CFArrayGetValueAtIndex(ps, 0));
+    CFStringRef isCharging = CFDictionaryGetValue(theDict, CFSTR("Power Source State" ));
+        
+    CFRelease(ps);
+    CFRelease(blob);
+
+    return CFStringCompare(isCharging, CFSTR("AC Power"), 0) == 0;
 }
 
 int main()
@@ -60,11 +75,9 @@ int main()
     {
 	while(1)
 	{
-	    FILE *ac_check_proc = popen("pmset -g | grep \"AC Power.*\\*\"", "r");
-	    if(ac_check_proc && fgetc(ac_check_proc) > 0)
+	    if(OnAC())
 	    {
 		AudioServicesPlaySystemSound(soundID);
-		pclose(ac_check_proc);
 	    }
 
 	    sleep(10);
