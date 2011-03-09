@@ -2,19 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Disabled</key>
-	<false/>
 	<key>KeepAlive</key>
+	<true/>
+	<key>RunAtLoad</key>
 	<true/>
 	<key>Label</key>
 	<string>net.tomsick.antipop</string>
-	<key>OnDemand</key>
-	<false/>
-	<key>ProgramArguments</key>
-	<array>
-		<string>/Extra/bin/antipopd</string>
-	</array>
-	<key>RunAtLoad</key>
-	<true/>
+	<key>Program</key>
+	<string>/Extra/bin/antipopd</string>
 </dict>
 </plist>
