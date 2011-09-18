@@ -5,6 +5,7 @@
 #include <AudioToolbox/AudioServices.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/ps/IOPSKeys.h>
+#include <IOKit/ps/IOPowerSources.h>
 
 int IsNum(int c)
 {
@@ -33,10 +34,10 @@ int FindFirstOf(FILE *file, FFPred pred)
 
 int OnAC()
 {
-    CFTypeRef blob = (CFTypeRef)IOPSCopyPowerSourcesInfo();
-    CFArrayRef ps = (CFTypeRef)IOPSCopyPowerSourcesList(blob);
+    CFTypeRef blob = IOPSCopyPowerSourcesInfo();
+    CFArrayRef ps = IOPSCopyPowerSourcesList(blob);
         
-    CFDictionaryRef theDict = (CFDictionaryRef)IOPSGetPowerSourceDescription(blob, CFArrayGetValueAtIndex(ps, 0));
+    CFDictionaryRef theDict = IOPSGetPowerSourceDescription(blob, CFArrayGetValueAtIndex(ps, 0));
     CFStringRef isCharging = CFDictionaryGetValue(theDict, CFSTR(kIOPSPowerSourceStateKey));
 
     int onAC = CFStringCompare(isCharging, CFSTR(kIOPSACPowerValue), 0) == 0;
