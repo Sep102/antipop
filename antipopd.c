@@ -63,11 +63,17 @@ int main()
     }
 
     SystemSoundID soundID;
-    AudioServicesCreateSystemSoundID
-        ( CFURLCreateWithFileSystemPath(NULL,
-              CFSTR("/Extra/share/antipop/silent.aiff"),
-              kCFURLPOSIXPathStyle, FALSE)
-        , &soundID );
+    OSStatus result = AudioServicesCreateSystemSoundID
+                        ( CFURLCreateWithFileSystemPath(NULL,
+                            CFSTR("/Extra/share/antipop/silent.aiff"),
+                            kCFURLPOSIXPathStyle, FALSE)
+                        , &soundID );
+
+    if(result != noErr)
+    {
+        printf("AudioServicesCreateSystemSoundID failed: %d\n", result);
+        exit(1);
+    }
 
     while(1)
     {
@@ -79,5 +85,10 @@ int main()
 	sleep(10);
     }
 
-    AudioServicesDisposeSystemSoundID(soundID);
+    result = AudioServicesDisposeSystemSoundID(soundID);
+    if(result != noErr)
+    {
+        printf("AudioServicesDisposeSystemSoundID failed: %d\n", result);
+        exit(1);
+    }
 }
