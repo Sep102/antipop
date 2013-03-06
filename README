@@ -1,15 +1,9 @@
 Dependencies:
-    To build installer: PackageMaker (installed with Xcode)
+    Xcode
+      Command Line Tools (installed from Xcode)
 
-To build:
+To build (with installer package):
     make all
-
-To build installer package:
-    make all
-    open Compiled\ antipop.pmdoc
-    Click Build in PackageMaker toolbar
-    Type name to save package as
-    Wait until build finished
 
 To install:
-    Open saved package
+    Open antipop-v<version>.pkg
